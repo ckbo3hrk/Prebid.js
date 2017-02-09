@@ -303,8 +303,12 @@ $$PREBID_GLOBAL$$.renderAd = function (doc, id) {
         if (doc===document || adObject.mediaType === 'video') {
           utils.logError('Error trying to write ad. Ad render call ad id ' + id + ' was prevented from writing to the main document.');
         } else if (ad) {
-          doc.write(ad);
-          doc.close();
+          if (doc.defaultView && 'srcdoc' in doc.defaultView.frameElement) {
+            doc.defaultView.frameElement.srcdoc = ad;
+          } else {
+            doc.write(ad);
+            doc.close();
+          }
           setRenderSize(doc, width, height);
         } else if (url) {
           doc.write('<IFRAME SRC="' + url + '" FRAMEBORDER="0" SCROLLING="no" MARGINHEIGHT="0" MARGINWIDTH="0" TOPMARGIN="0" LEFTMARGIN="0" ALLOWTRANSPARENCY="true" WIDTH="' + width + '" HEIGHT="' + height + '"></IFRAME>');
