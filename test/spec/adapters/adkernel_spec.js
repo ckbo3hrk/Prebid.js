@@ -235,11 +235,11 @@ describe('Adkernel adapter', () => {
       sandbox.spy(utils, 'createTrackPixelHtml');
       ajaxStub.onCall(0).callsArgWith(1, JSON.stringify(bidResponse1));
       doRequest([bid1_zone1]);
-      expect(bidmanager.addBidResponse.firstCall.args[1].getStatusCode()).to.equal(CONSTANTS.STATUS.GOOD);
+      let bidResp = bidmanager.addBidResponse.firstCall.args[1];
+      expect(bidResp.getStatusCode()).to.equal(CONSTANTS.STATUS.GOOD);
       expect(utils.createTrackPixelHtml.calledOnce);
-      let result = pbjs.getBidResponsesForAdUnitCode(bid1_zone1.placementCode);
       let expectedNurl = bidResponse1.seatbid[0].bid[0].nurl + '&px=1';
-      expect(result.bids[0].ad).to.include(expectedNurl);
+      expect(bidResp.ad).to.include(expectedNurl);
     });
 
     it('should perform usersync for each unique host/zone combination', () => {

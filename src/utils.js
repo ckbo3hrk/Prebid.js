@@ -163,15 +163,17 @@ exports.parseGPTSingleSizeArray = function (singleSize) {
   }
 };
 
-exports.getTopWindowLocation = function () {
-  let location;
+exports.getTopWindow = function() {
   try {
-    location = window.top.location;
+    let doc = window.top.document;
+    return window.top;
   } catch (e) {
-    location = window.location;
+    return window;
   }
+};
 
-  return location;
+exports.getTopWindowLocation = function () {
+  return this.getTopWindow().location;
 };
 
 exports.getTopWindowUrl = function () {
@@ -183,6 +185,15 @@ exports.getTopWindowUrl = function () {
   }
 
   return href;
+};
+
+exports.getTopWindowDocument = function() {
+  let topWindow = this.getTopWindow();
+  return topWindow.document;
+};
+
+exports.getTopWindowReferrer = function() {
+  return this.getTopWindow().document.referrer;
 };
 
 exports.logWarn = function (msg) {
