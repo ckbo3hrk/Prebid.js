@@ -3,7 +3,7 @@ import bidfactory from 'src/bidfactory';
 import * as utils from 'src/utils';
 import {ajax} from 'src/ajax';
 import Adapter from 'src/adapters/adapter';
-
+XXXX
 /**
  * Adapter for requesting bids from AdKernel white-label platform
  * @class
