@@ -5,6 +5,9 @@ import * as utils from 'src/utils';
 import bidmanager from 'src/bidmanager';
 import CONSTANTS from 'src/constants.json';
 
+
+XXX;
+
 describe('Adkernel adapter', () => {
 
   const bid1_zone1 = {
